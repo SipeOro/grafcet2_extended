@@ -381,57 +381,59 @@
 
 % DIVERGENCE
 % ----------
-\newcommand{\Divergence}[2]
-{
+\newcommand{\Divergence}[3][true]{
   \hspace{1em}\vrule\\
-  \setbox\LHS\hbox{\hspace{-2.33em}\begin{tabular}{@{}l}#1\end{tabular}}%
-  \setbox\RHS\hbox{\begin{tabular}{@{}l}#2\end{tabular}}%
+  \setbox\LHS\hbox{\hspace{-2.33em}\begin{tabular}{@{}l}#2\end{tabular}}%
+  \setbox\RHS\hbox{\begin{tabular}{@{}l}#3\end{tabular}}%
   \setlength{\LLHS}{\wd\LHS}
   \setlength{\LRHS}{\wd\RHS}
-
   \ifthenelse{\dp\LHS < \dp\RHS}
   {
-  \setlength{\diff}{\dp\RHS}
-  \addtolength{\diff}{-\dp\LHS}
-  \setlength{\difff}{\dp\LHS}
-  \addtolength{\difff}{\diff}
-  \begin{tabular}{@{}l@{}l@{}}
-          \raise - \difff
-          \vbox{%
-              \hsize\LLHS
-              \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
-              \hbox to \hsize{\hspace{-1.35em}\vrule height \diff}
-              \box\LHS
-              \hbox to \hsize{\hspace{-1.35em}\vrule height \diff}
-              \hbox to \LLHS{\hspace{-2.5em}\rule[-.4pt]{\LLHS}{.4pt}\rule[-.4pt]{4.5em}{.4pt}}
-          }%
-          &
-          \box\RHS
-   \end{tabular}
+    \setlength{\diff}{\dp\RHS}
+    \addtolength{\diff}{-\dp\LHS}
+    \setlength{\difff}{\dp\LHS}
+    \addtolength{\difff}{\diff}
+    \begin{tabular}{@{}l@{}l@{}}
+      \raise - \difff
+      \vbox{%
+        \hsize\LLHS
+        \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
+        \hbox to \hsize{\hspace{-1.35em}\vrule height \diff}
+        \box\LHS
+        \hbox to \hsize{\hspace{-1.35em}\vrule height \diff}
+        \ifthenelse{\equal{#1}{true}}{
+          \hbox to \LLHS{\hspace{-2.5em}\rule[-.4pt]{\LLHS}{.4pt}\rule[-.4pt]{4.5em}{.4pt}}
+        }{}
+      }%
+      &
+      \box\RHS
+    \end{tabular}
   }
   {
-  \setlength{\diff}{\dp\LHS}
-  \addtolength{\diff}{-\dp\RHS}
-  \setlength{\difff}{\dp\RHS}
-  \addtolength{\difff}{\diff}
-  \begin{tabular}{@{}l@{}l@{}}
-          \raise - \difff
-          \vbox{%
-              \hsize\LLHS
-              \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
-              \box\LHS
-              \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
-          }%
-          &
-          \addtolength{\difff}{-.4pt}   
-          \raise - \difff
-          \vbox{%
-              \hsize\LRHS
-              \hbox to \hsize{\hspace{1em}\vrule height \diff}
-              \box\RHS
-              \hbox to \hsize{\hspace{1em}\vrule height \diff}
-          }
-   \end{tabular}
+    \setlength{\diff}{\dp\LHS}
+    \addtolength{\diff}{-\dp\RHS}
+    \setlength{\difff}{\dp\RHS}
+    \addtolength{\difff}{\diff}
+    \begin{tabular}{@{}l@{}l@{}}
+      \raise - \difff
+      \vbox{%
+        \hsize\LLHS
+        \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
+        \box\LHS
+        \ifthenelse{\equal{#1}{true}}{
+          \hbox to \hsize{\hspace{-2.5em}\rule{\LLHS}{.4pt}\rule{4.5em}{.4pt}}
+        }{}
+      }%
+      &
+      \addtolength{\difff}{-.4pt}
+      \raise - \difff
+      \vbox{%
+        \hsize\LRHS
+        \hbox to \hsize{\hspace{1em}\vrule height \diff}
+        \box\RHS
+        \hbox to \hsize{\hspace{1em}\vrule height \diff}
+      }
+    \end{tabular}
   }
 \\}%divergence end
 
